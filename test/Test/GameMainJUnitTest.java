@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author jayasanka shop
+ * @author Thalisha-
  */
 public class GameMainJUnitTest {
 

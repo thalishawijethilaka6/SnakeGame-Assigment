@@ -1,55 +1,52 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package lk.assignment.main;
 
 import java.awt.*;
 import java.util.*;
 
-// Food is a food item that the snake can eat. It is placed randomly in the pit.
+/**
+ *
+ * @author Thalisha-
+ */
 public class Food {
-	//current food location(x,y) in cells
-	private int x,y;
-	//color for display
-	private Color color = Color.BLUE;
-	//for randomly placing the food
-	private Random rand = new Random();
-	
-	//default constructor
-	public Food() {
-		//place outside the pit, so that it will not be "displayed"
-		x = -1;
-		y = -1;
-	}
-	
-	//Regenerate a food item. Randomly place inside the pit
-	public void regenerate() {
-		x = rand.nextInt(GameMain.COLUMNS - 4) + 2;
-		y = rand.nextInt(GameMain.ROWS - 4) + 2;
-		
-	}
-	//Return the x, y coordinate of the cell that contains this food item
-	public int getX() {
-		return x;
-	}
-	
-	public int getY() {
-		return y;
-	}
-	
-	//Draw itself
-	public void draw(Graphics g) {
-		g.setColor(color);
-		g.fill3DRect(x * GameMain.CELL_SIZE,
-				y* GameMain.CELL_SIZE, 
-				 GameMain.CELL_SIZE,
-				 GameMain.CELL_SIZE, 
-				true);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+    private int x, y;
+    //color for display
+    private Color color = Color.BLUE;
+    private Random rand = new Random();
+
+    //default constructor
+    public Food() {
+
+        x = -1;
+        y = -1;
+    }
+
+    public void regenerate() {
+        x = rand.nextInt(GameMain.COLUMNS - 4) + 2;
+        y = rand.nextInt(GameMain.ROWS - 4) + 2;
+
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void draw(Graphics g) {
+        g.setColor(color);
+        g.fill3DRect(x * GameMain.CELL_SIZE,
+                y * GameMain.CELL_SIZE,
+                GameMain.CELL_SIZE,
+                GameMain.CELL_SIZE,
+                true);
+    }
+
 }

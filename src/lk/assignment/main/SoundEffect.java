@@ -1,95 +1,103 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package lk.assignment.main;
 
 import java.io.*;
 import java.net.URL;
 import javax.sound.sampled.*;
 
-
+/**
+ *
+ * @author Thalisha-
+ */
 public enum SoundEffect {
-	DIE("/lk/assignment/audios/died.wav"), 
-	EAT("/lk/assignment/audios/eat.wav"),
-	CLICK("/lk/assignment/audios/click.wav");
-	public static enum Volume {
-		MUTE, LOW, MEDIUM, HIGHT
-	}
+    DIE("/lk/assignment/audios/died.wav"),
+    EAT("/lk/assignment/audios/eat.wav"),
+    CLICK("/lk/assignment/audios/click.wav");
+
+    public static enum Volume {
+        MUTE, LOW, MEDIUM, HIGHT
+    }
 
     private SoundEffect() {
     }
-        
-	
-	public static Volume volume = Volume.LOW;
-	private Clip clip;
-	public boolean loop = false;
-	private boolean loopStarted;
-	
 
-	SoundEffect(String soundFileName){
-		try {
+    public static Volume volume = Volume.LOW;
+    private Clip clip;
+    public boolean loop = false;
+    private boolean loopStarted;
 
-			URL url = SoundEffect.class.getResource(soundFileName);
+    SoundEffect(String soundFileName) {
+        try {
 
-			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
-			clip = AudioSystem.getClip();
+            URL url = SoundEffect.class.getResource(soundFileName);
 
-			clip.open(audioInputStream);
-			
-		}catch(UnsupportedAudioFileException e) {
-			e.printStackTrace();
-		}catch (LineUnavailableException e) {
-			e.printStackTrace();
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void play() {
-		if(volume != volume.MUTE) {
-			if(clip.isRunning()) clip.stop(); 
-			clip.setFramePosition(0);
-			clip.start();
-		}
-	}
-	
-	public void loop() {
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				while(loop) {
-					if(volume != volume.MUTE && !clip.isRunning()) {
-						clip.loop(Clip.LOOP_CONTINUOUSLY); 
-					}
-					try {
-						Thread.sleep(clip.getMicrosecondLength());
-					}catch(InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-				
-			}
-		}).start();
-	}
-	
-	public void startLoop() {
-		if(loopStarted != true) {
-			loop = true;
-			loop();
-		}
-	}
-	
-	public void stopLoop() {
-		loop = false;
-		clip.loop(0);
-	}
-	
-	public void stop() {
-		clip.stop();
-		clip.setFramePosition(0);
-	}
-	
-	static void init() {
-		values();
-	}
-	
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
+            clip = AudioSystem.getClip();
+
+            clip.open(audioInputStream);
+
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void play() {
+        if (volume != volume.MUTE) {
+            if (clip.isRunning()) {
+                clip.stop();
+            }
+            clip.setFramePosition(0);
+            clip.start();
+        }
+    }
+
+    public void loop() {
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                while (loop) {
+                    if (volume != volume.MUTE && !clip.isRunning()) {
+                        clip.loop(Clip.LOOP_CONTINUOUSLY);
+                    }
+                    try {
+                        Thread.sleep(clip.getMicrosecondLength());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }).start();
+    }
+
+    public void startLoop() {
+        if (loopStarted != true) {
+            loop = true;
+            loop();
+        }
+    }
+
+    public void stopLoop() {
+        loop = false;
+        clip.loop(0);
+    }
+
+    public void stop() {
+        clip.stop();
+        clip.setFramePosition(0);
+    }
+
+    static void init() {
+        values();
+    }
 
 }

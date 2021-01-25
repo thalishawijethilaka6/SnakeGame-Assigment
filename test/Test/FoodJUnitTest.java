@@ -3,6 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Test;
 
 import lk.assignment.main.Food;
@@ -16,7 +21,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author jayasanka shop
+ * @author Thalisha-
  */
 public class FoodJUnitTest {
     
@@ -38,17 +43,12 @@ public class FoodJUnitTest {
     }
     
     @Before
-    public void setUp() {
-         //Food food = new Food();    
+    public void setUp() {    
     }
     
     @After
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+ 
 }
